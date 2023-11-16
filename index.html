@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width = device-width, initial-scale=1"></meta>
+	<title>reviews-app</title>
+	<style>
+	body{
+		margin:0;
+		padding:0;
+	}
+	.app-container{
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		align-items:center;
+		background-image:url("reviews-bg.png");
+		background-size:cover;
+		min-height:100vh;		
+	}
+	.main-heading{
+		font-size:30px;
+		color:#ffffff;
+		padding:0;
+		margin:0;
+	}
+	.sub-container{
+		display:flex;
+		justify-content:center;
+		align-items:center;		
+		font-family:"Roboto";
+		max-width:50%;
+		min-height:50vh;
+		padding:3% 2%;
+		<!-- border:1px solid orange; -->
+	}
+	.left-arrow-button{
+		background-color:transparent;
+		outline:0;
+		border:0;
+		cursor:pointer;
+	}
+	.right-arrow-button{
+		background-color:transparent;
+		outline:0;
+		border:0;
+		cursor:pointer;
+	}
+	.review-container{
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		align-items:center;	
+		text-align:center;	
+	}
+	.username-image{
+		max-width:100px;
+	}
+	.user-name{
+		color:#ffffff;
+		font-size:16px;
+	}
+	.company-name{
+		color:#171f46;
+		font-size:16px;
+	}
+	.description-text{
+		color:#171f46;
+		font-size:16px;
+	}
+	@media screen and (max-width:768px){
+		.sub-container{		
+			max-width:90%;
+			min-height:50vh;		
+		}
+	
+	}
+	
+	</style>
+</head>
+<body>
+<div class="app-container">
+	<h1 class="main-heading">Reviews</h1>
+	
+	<div class="sub-container">		
+		<button type="button" class="left-arrow-button" onclick=previousId()>
+			<img src="left-arrow-img.png" alt="leftArrow" class="arrow-image" />
+		</button>
+		<div class="review-container">	
+			<img src="wade-warren-img.png" alt="username" class="username-image" id="userImage" />
+			<p class="user-name" id="userName" >Wade Warren</p>
+			<p class="company-name" id="companyName" >Rang</p>
+			<p class="description-text" id="companyDescription" >The most important thing I learnt is that nothing is a failure, but what we learn from that is a rich and rewarding experience.</p>
+		</div>
+		<button type="button" class="right-arrow-button" onclick=nextId()>
+			<img src="right-arrow-img.png" alt="rightArrow" class="arrow-image" />
+		</button>	
+	</div>
+	
+</div>
+
+<script>
+
+const reviewsList = [
+  {
+    imgUrl: 'wade-warren-img.png',
+    username: 'Wade Warren',
+    companyName: 'Rang',
+    description:
+      'The most important thing I learnt is that nothing is a failure, but what we learn from that is a rich and rewarding experience.',
+  },
+  {
+    imgUrl: 'adrian-williams-img.png',
+    username: 'Adrian Williams',
+    companyName: 'WheelO',
+    description:
+      'Coming to Startup School is the best thing that has happened to me. I wish every startup in the country should get this opportunity.',
+  },
+  {
+    imgUrl: 'sherry-jhonson-img.png',
+    username: 'Sherry Johnson',
+    companyName: 'MedX',
+    description:
+      'I am glad to have such experienced mentors guiding us in every step through out the 4 weeks. I have improved personally and developed many interpersonal skills.',
+  },
+  {
+    imgUrl: 'ronald-jones-img.png',
+    username: 'Ronald Jones',
+    companyName: 'Infinos Tech',
+    description:
+      'I am really loving the way how mentors are taking care of us, the way they are explaining big theories with lots of case studies and innovative methods.',
+  },
+]
+
+
+let state= {
+	idNum:0,	
+}
+let reviewsListLength= reviewsList.length
+//console.log(reviewsListLength)
+
+
+let userImageEl=document.getElementById("userImage");
+let userNameEl=document.getElementById("userName");
+let companyNameEl=document.getElementById("companyName");
+let companyDescriptionEl=document.getElementById("companyDescription");
+
+
+function nextId(){
+	if(state.idNum < reviewsListLength-1){
+		state.idNum += 1
+		console.log(state);
+		updateReview()
+	}	
+}
+
+function previousId(){
+	if(state.idNum > 0){
+		state.idNum -= 1
+		console.log(state);
+		updateReview()
+	}	
+}
+
+function updateReview (){	
+	console.log(reviewsList[state.idNum])
+	userImageEl.src=reviewsList[state.idNum].imgUrl;
+	userNameEl.textContent=reviewsList[state.idNum].username;
+	companyNameEl.textContent=reviewsList[state.idNum].companyName;
+	companyDescriptionEl.textContent=reviewsList[state.idNum].description;
+}
+
+</script>
+
+</body>
+</html>
